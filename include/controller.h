@@ -1,7 +1,7 @@
 #pragma once
 
-#include <stdio.h>
 #include <stdbool.h>
+#include <stdio.h>
 
 // calculator button codes
 #define BUTTON_SYMBOL_0 0
@@ -16,11 +16,11 @@
 #define BUTTON_SYMBOL_9 9
 #define BUTTON_EQUALS 10
 
-#define BUTTONS_TOTAL 11 // ! dont forget to change this after adding new button code 
+#define BUTTONS_TOTAL \
+    11  // ! dont forget to change this after adding new button code
 
 // screen parameters
-#define SCREEN_CAPACITY_SYMBOLS 100 // ? change it to real one
-
+#define SCREEN_CAPACITY_SYMBOLS 100  // ? change it to real one
 
 /**
  * Параметры функции-обработчика
@@ -30,28 +30,24 @@ struct HandlerParameters {
     // maybe add more parameters here
 };
 
-
 /**
- * Содержит информацию о функции-обработчике и параметрах, 
+ * Содержит информацию о функции-обработчике и параметрах,
  * с которыми она вызывается
  */
 struct HandlerInfo {
-    void (* handlerFunction) (struct HandlerParameters);
+    void (*handlerFunction)(struct HandlerParameters);
     struct HandlerParameters parameters;
 };
-
 
 /**
  * Начальная инициализация требуемых внутренних параметров контроллера
  */
 bool initController();
 
-
 /**
  * Вывести переданную строку
  */
 void showString(char str[], int count);
-
 
 /**
  * Добавить обработчик на нажатие кнопки
@@ -59,7 +55,6 @@ void showString(char str[], int count);
  * @param handlerConfig обработчик
  */
 bool setHandler(int buttonCode, struct HandlerInfo handlerConfig);
-
 
 /**
  * Начать прослушивать события нажатий на кнопки

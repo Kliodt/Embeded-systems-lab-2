@@ -2,12 +2,10 @@
 
 struct HandlerInfo allHandlers[BUTTONS_TOTAL] = {0};
 
-bool initController() {
-    return true;
-}
+bool initController() { return true; }
 
 void showString(char str[], int count) {
-    str[count] = '\0'; // bad
+    str[count] = '\0';  // bad
     printf(str);
 }
 
@@ -20,9 +18,9 @@ bool setHandler(int buttonCode, struct HandlerInfo handlerConfig) {
 bool tryCallHandler(int buttonCode) {
     if (buttonCode >= BUTTONS_TOTAL) return false;
 
-    struct HandlerInfo * handlerInfo = &allHandlers[buttonCode];
-    if (handlerInfo->handlerFunction) { // check if we have this handler
-        handlerInfo->handlerFunction(handlerInfo->parameters); // call handler
+    struct HandlerInfo* handlerInfo = &allHandlers[buttonCode];
+    if (handlerInfo->handlerFunction) {  // check if we have this handler
+        handlerInfo->handlerFunction(handlerInfo->parameters);  // call handler
         return true;
     } else {
         return false;
@@ -31,7 +29,7 @@ bool tryCallHandler(int buttonCode) {
 
 void startListening() {
     while (true) {
-        break; // listen here
+        break;  // listen here
     }
 
     // (temporal) simulate listening FOR TESTING
@@ -48,6 +46,4 @@ void startListening() {
     tryCallHandler(BUTTON_SYMBOL_0);
 
     tryCallHandler(BUTTON_EQUALS);
-    
 }
-

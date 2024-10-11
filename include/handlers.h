@@ -7,7 +7,6 @@
  */
 void appendCharHandler(struct HandlerParameters params);
 
-
 /**
  * Отобразить результат на экране
  */
