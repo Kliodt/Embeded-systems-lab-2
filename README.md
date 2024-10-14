@@ -17,3 +17,35 @@ todo: написать
 
 ### Из CLion
 todo: написать 
+
+***
+
+## Калькулятор
+### Клавиатура
+
+<div style="display: table; text-align: center">
+<div style="display: table-cell; padding: 10px">
+Раскладка 1
+
+| 1 | 2 | 3 |
+| - | - | - |
+| 4 | 5 | 6 |
+| 7 | 8 | 9 |
+| . | 0 | S |
+
+</div>
+<div style="display: table-cell; padding: 0 20px"> 
+Раскладка 2
+
+| + | ( | ) |
+| - | - | - |
+| - | < | C |
+| * | = |   |
+| / |   | S |
+
+</div>
+</div>
+
+- **S** - (switch) переключить раскладку
+- **<** - стереть 1 символ
+- **C** - (clear) очистить весь экран
