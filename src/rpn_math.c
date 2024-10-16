@@ -209,18 +209,48 @@ enum resolve_expression_code compute_rpn(struct expression_token * rpn_buffer, s
     *result = stack.data[0].number;
     return OK;
 }
+/**
+ * Итак, эта функция принимает:
+ *      expression - строка математического выражения без пробелов
+ *      expression_size - длина данной строки
+ *      result - ссылка на число-результат
+ * 
+ * Эта функция отдает:
+ *      enum resolve_expression_code:
+ * OK - если все ок и можно забирать результат
+ * NOT_VALID - если выражение не валидно
+ * ERROR - если произошло деление на 0
+ * 
+ * P.S. Надо бы сделать тесты конечно
+ * 
+ * **/
+int check_brackets(char* expression, size_t expression_size){
+    size_t count = 0;
+    for(size_t i = 0; i < expression_size; i++){
+        if (expression[i] == '(') count++;
+        if (expression[i] == ')') count--;
+        if(count < 0) return 0;
+    }
+    if(count == 0) return 1;
+    return 0;
+}
 
 enum resolve_expression_code resolve_expression(char* expression, size_t expression_size, double* result){
     if(expression_size <= 0) return NOT_VALID;
     struct expression_token token_buffer[1024];
     struct expression_token rpn_buffer[1024] = {0};
-    
+    if(!check_brackets(expression, expression_size)) return NOT_VALID;
+
     size_t current_token_buffer_size = split_equaition_into_tokens(expression, expression_size, token_buffer);
     if(current_token_buffer_size == -1) return NOT_VALID;
 
     size_t rpn_buffer_size = reorder_in_rpn(token_buffer, current_token_buffer_size, rpn_buffer);
     if(rpn_buffer_size == -1) return NOT_VALID;
 
+    /*
+        Отладочный принты
+    */
+    /*
     for(size_t i = 0; i < current_token_buffer_size; i++){
         printf("{%f, %d}\n", token_buffer[i].number, (int)token_buffer[i].operation);
     }
@@ -229,6 +259,7 @@ enum resolve_expression_code resolve_expression(char* expression, size_t express
         printf("{%f, %d}\n", rpn_buffer[i].number, (int)rpn_buffer[i].operation);
     }
     printf("\n");
+    */
 
     return compute_rpn(rpn_buffer, rpn_buffer_size, result);
 }
