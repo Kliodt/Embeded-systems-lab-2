@@ -1,4 +1,6 @@
 #include "handlers.h"
+#include "rpn_math.h"
+#include <stdio.h>
 
 struct {
     char inputBuffer[SCREEN_CAPACITY_SYMBOLS];
@@ -28,6 +30,21 @@ void switchLayout(struct HandlerParameters params) {
 }
 
 void equalsHandler(struct HandlerParameters params) {
-    // todo: call calculation logic
-    showString(globalState.inputBuffer, globalState.count);
+    double result = 0;
+    enum resolve_expression_code resultCode = 
+        resolve_expression("3*(1.1-2)", 9, &result);
+
+    switch (resultCode) {
+        case OK:
+            snprintf(globalState.inputBuffer, SCREEN_CAPACITY_SYMBOLS, "%lf", result);
+            showString(globalState.inputBuffer, globalState.count);
+            break;
+        case ERROR:
+            showString("Error", 5);
+            break;
+        case NOT_VALID:
+            showString("Invalid expression", 18);
+            break;
+        default: break;
+    }
 }

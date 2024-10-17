@@ -104,9 +104,9 @@ size_t split_equaition_into_tokens(char* expression, size_t expression_size, str
             if(current_symbol == '.' && number_start == -1) return -1;
             if(number_start == -1) number_start = i;
             if(i == expression_size - 1){
-                strncpy(number_buffer, expression + number_start, i - number_start + 1);
+                strncpy_s(number_buffer, 1024, expression + number_start, i - number_start + 1);
                 number_buffer[i - number_start + 1] = '\0';
-                sscanf(number_buffer, "%lf", &current_number);
+                sscanf_s(number_buffer, "%lf", &current_number);
                 struct expression_token cur_t;
                 cur_t.operation = NO_OP;
                 cur_t.number = current_number;
@@ -181,7 +181,7 @@ int reorder_in_rpn(struct expression_token *token_buffer, size_t token_buffer_si
         rpn_buffer[rpn_buffer_size++] = buffer_token;
     }
 
-    return rpn_buffer_size;
+    return (int) rpn_buffer_size;
 
 }
 
@@ -266,16 +266,16 @@ enum resolve_expression_code resolve_expression(char* expression, size_t express
 
 
 
-int main(){
-    char* s = "3*(1.1-2)";
-    double r;
-    enum resolve_expression_code result = resolve_expression(s, 9, &r);
-    if(result == OK){
-        printf("%f\n", r);
-    } else if (result == NOT_VALID){
-        printf("Not valid expression");
-    } else{
-        printf("Eror during computation");
-    }
-    return 0;
-}
+// int main(){
+//     char* s = "3*(1.1-2)";
+//     double r;
+//     enum resolve_expression_code result = resolve_expression(s, 9, &r);
+//     if(result == OK){
+//         printf("%f\n", r);
+//     } else if (result == NOT_VALID){
+//         printf("Not valid expression");
+//     } else{
+//         printf("Eror during computation");
+//     }
+//     return 0;
+// }

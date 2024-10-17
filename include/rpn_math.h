@@ -1,5 +1,4 @@
-#ifndef RPN_MATH_H
-#define RPN_MATH_H
+#pragma once
 #include <stddef.h>
 
 enum resolve_expression_code {
@@ -25,4 +24,4 @@ struct expression_token{
 
 enum resolve_expression_code resolve_expression(char* expression, size_t expression_size, double* result);
 
-#endif //RPN_MATH_H
+// #endif //RPN_MATH_H
