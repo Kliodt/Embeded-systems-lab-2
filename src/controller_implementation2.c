@@ -59,24 +59,23 @@ bool tryCallHandler(int buttonCode) {
 }
 
 void startListening() {
-    while (true) {
-        break;  // listen here
-    }
+
+    KB_Test();
 
     // (temporal) simulate listening FOR TESTING
-    tryCallHandler(BUTTON_SYMBOL_1);
-    tryCallHandler(BUTTON_SYMBOL_2);
-    tryCallHandler(BUTTON_SYMBOL_3);
-    tryCallHandler(BUTTON_SYMBOL_4);
-    tryCallHandler(BUTTON_SYMBOL_5);
-    tryCallHandler(BUTTON_SYMBOL_6);
-    tryCallHandler(BUTTON_SYMBOL_7);
-    tryCallHandler(BUTTON_SYMBOL_8);
-    tryCallHandler(BUTTON_SYMBOL_9);
-    tryCallHandler(BUTTON_SYMBOL_1);
-    tryCallHandler(BUTTON_SYMBOL_0);
+    // tryCallHandler(BUTTON_SYMBOL_1);
+    // tryCallHandler(BUTTON_SYMBOL_2);
+    // tryCallHandler(BUTTON_SYMBOL_3);
+    // tryCallHandler(BUTTON_SYMBOL_4);
+    // tryCallHandler(BUTTON_SYMBOL_5);
+    // tryCallHandler(BUTTON_SYMBOL_6);
+    // tryCallHandler(BUTTON_SYMBOL_7);
+    // tryCallHandler(BUTTON_SYMBOL_8);
+    // tryCallHandler(BUTTON_SYMBOL_9);
+    // tryCallHandler(BUTTON_SYMBOL_1);
+    // tryCallHandler(BUTTON_SYMBOL_0);
 
-    tryCallHandler(BUTTON_EQUALS);
+    // tryCallHandler(BUTTON_EQUALS);
 }
 
 void changeLayout() {
@@ -88,10 +87,10 @@ void changeLayout() {
 }
 
 void KB_Test(void) {
-    UART_Transmit((uint8_t *)"KB test start\n");
+    // UART_Transmit((uint8_t *)"KB test start\n");
     uint8_t Row[4] = {ROW1, ROW2, ROW3, ROW4}, Key;
     oled_Reset();
-    oled_WriteString("From bottom to top", Font_7x10, White);
+    // oled_WriteString("From bottom to top", Font_7x10, White);
     OLED_KB(OLED_Keys);
     oled_UpdateScreen();
     while (1) {
