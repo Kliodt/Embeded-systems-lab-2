@@ -9,6 +9,7 @@ struct
 } globalState = { .count = 0 };
 
 void appendCharHandler(struct HandlerParameters params) {
+    if (globalState.count >= SCREEN_CAPACITY_SYMBOLS) return;
     globalState.inputBuffer[globalState.count] = params.symbol;
     globalState.count++;
     showString(globalState.inputBuffer, globalState.count);
