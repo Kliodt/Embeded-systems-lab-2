@@ -8,6 +8,7 @@ struct HandlerInfo allHandlers[BUTTONS_TOTAL] = {0};
 bool initController() { return true; }
 
 void showString(char str[], int count) {
+    oled_Reset();
     FontDef defaultFont = Font_7x10;
     uint8_t widthInSymbols = OLED_WIDTH / defaultFont.FontWidth;
     uint8_t heightInSymbols = OLED_HEIGHT / defaultFont.FontHeight;
