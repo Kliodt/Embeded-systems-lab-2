@@ -79,13 +79,13 @@ size_t split_equaition_into_tokens(char* expression, size_t expression_size, str
     char current_symbol;
     double current_number = 0.0;
     char number_buffer[100] = "";
-    size_t number_start = -1;
+    int number_start = -1;
     size_t i = 0;
     while(i < expression_size){
         current_symbol = expression[i];
         if(is_defined_operation(current_symbol)){
             if(number_start != -1){
-                strncpy_s(number_buffer, 1024, expression + number_start, i - number_start);
+                strncpy_s(number_buffer, 99, expression + number_start, i - number_start);
                 number_buffer[i - number_start + 1] = '\0';
                 sscanf_s(number_buffer, "%lf", &current_number);
                 struct expression_token cur_t;
@@ -104,7 +104,7 @@ size_t split_equaition_into_tokens(char* expression, size_t expression_size, str
             if(current_symbol == '.' && number_start == -1) return -1;
             if(number_start == -1) number_start = i;
             if(i == expression_size - 1){
-                strncpy_s(number_buffer, 1024, expression + number_start, i - number_start + 1);
+                strncpy_s(number_buffer, 99, expression + number_start, i - number_start + 1);
                 number_buffer[i - number_start + 1] = '\0';
                 sscanf_s(number_buffer, "%lf", &current_number);
                 struct expression_token cur_t;
@@ -237,7 +237,7 @@ int check_brackets(char* expression, size_t expression_size){
 
 enum resolve_expression_code resolve_expression(char* expression, size_t expression_size, double* result){
     if(expression_size <= 0) return NOT_VALID;
-    struct expression_token token_buffer[1024];
+    struct expression_token token_buffer[1024] = {0};
     struct expression_token rpn_buffer[1024] = {0};
     if(!check_brackets(expression, expression_size)) return NOT_VALID;
 
