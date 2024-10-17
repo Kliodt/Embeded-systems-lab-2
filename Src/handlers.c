@@ -6,7 +6,6 @@ struct
 {
   char inputBuffer[SCREEN_CAPACITY_SYMBOLS];
   int count;
-  bool kb_layout;
 } globalState = { .count = 0 };
 
 void appendCharHandler(struct HandlerParameters params) {
@@ -28,7 +27,7 @@ void clearAllHandler(struct HandlerParameters params) {
 }
 
 void switchLayout(struct HandlerParameters params) {
-    // todo: call switch layout from controller
+    changeLayout()
 }
 
 int trackingZeroesCount(char buf[], int count);
