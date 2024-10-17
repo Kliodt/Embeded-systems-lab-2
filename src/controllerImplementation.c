@@ -7,6 +7,7 @@ bool initController() { return true; }
 void showString(char str[], int count) {
     str[count] = '\0';  // bad
     printf(str);
+    printf("\n");
 }
 
 bool setHandler(int buttonCode, struct HandlerInfo handlerConfig) {
@@ -42,8 +43,24 @@ void startListening() {
     tryCallHandler(BUTTON_SYMBOL_7);
     tryCallHandler(BUTTON_SYMBOL_8);
     tryCallHandler(BUTTON_SYMBOL_9);
-    tryCallHandler(BUTTON_SYMBOL_1);
     tryCallHandler(BUTTON_SYMBOL_0);
+    
+    tryCallHandler(BUTTON_LEFT_BRACKET);
+    tryCallHandler(BUTTON_RIGHT_BRACKET);
+    tryCallHandler(BUTTON_PLUS);
+    tryCallHandler(BUTTON_MINUS);
+    tryCallHandler(BUTTON_MULTIPLY);
+    tryCallHandler(BUTTON_DIVIDE);
 
     tryCallHandler(BUTTON_EQUALS);
+
+    tryCallHandler(BUTTON_CLEAR_ONE);
+    tryCallHandler(BUTTON_CLEAR_ONE);
+    tryCallHandler(BUTTON_CLEAR_ONE);
+
+    tryCallHandler(BUTTON_CLEAR_ALL);
+    tryCallHandler(BUTTON_CLEAR_ALL);
+
+    tryCallHandler(BUTTON_CLEAR_ONE);
+
 }
