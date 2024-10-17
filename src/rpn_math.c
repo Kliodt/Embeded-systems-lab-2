@@ -102,7 +102,7 @@ size_t split_equaition_into_tokens(char* expression, size_t expression_size, str
         }
         else if(is_float_part(current_symbol)){
             if(current_symbol == '.' && number_start == -1) return -1;
-            if(number_start == -1) number_start = i;
+            if(number_start == -1) number_start = (int) i;
             if(i == expression_size - 1){
                 strncpy_s(number_buffer, 99, expression + number_start, i - number_start + 1);
                 number_buffer[i - number_start + 1] = '\0';

@@ -29,14 +29,17 @@ void switchLayout(struct HandlerParameters params) {
     // todo: call switch layout from controller
 }
 
+int trackingZeroesCount(char buf[], int count);
+
 void equalsHandler(struct HandlerParameters params) {
     double result = 0;
     enum resolve_expression_code resultCode = 
-        resolve_expression("3*(1.1-2)", 9, &result);
+        resolve_expression(globalState.inputBuffer, globalState.count, &result);
 
     switch (resultCode) {
         case OK:
-            snprintf(globalState.inputBuffer, SCREEN_CAPACITY_SYMBOLS, "%lf", result);
+            globalState.count = snprintf(globalState.inputBuffer, SCREEN_CAPACITY_SYMBOLS, "%lf", result);
+            globalState.count -= trackingZeroesCount(globalState.inputBuffer, globalState.count);
             showString(globalState.inputBuffer, globalState.count);
             break;
         case ERROR:
@@ -47,4 +50,20 @@ void equalsHandler(struct HandlerParameters params) {
             break;
         default: break;
     }
+}
+
+// returns the number of zeroes at the end of the string after the point
+int trackingZeroesCount(char buf[], int count) {
+    int zeroesCount = 0;
+    bool keepCount = true; 
+    for (unsigned i = count - 1; i >= 0; i--) {
+        if (keepCount && buf[i] == '0') zeroesCount++;
+        else {
+            if (buf[i] == '.') {
+                return keepCount ? zeroesCount + 1 : zeroesCount;
+            }; 
+            keepCount = false;
+        }
+    }
+    return 0;
 }
