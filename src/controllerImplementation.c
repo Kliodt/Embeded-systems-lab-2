@@ -28,43 +28,45 @@ bool tryCallHandler(int buttonCode) {
     }
 }
 
+bool changeLayout() {return 1;};
+
 void startListening() {
     while (true) {
-        break;  // listen here
+        // break;  // listen here
+        printf("-------------\n");
+        printf("Input: ");
+        char word[256];
+        scanf_s("%s" , word, sizeof(word));
+        int i = 0;
+        while (word[i++]) {
+            char ch = word[i-1];
+            int btnIndex;
+            switch (ch) {
+                case '1': btnIndex = 0; break;
+                case '2': btnIndex = 1; break; 
+                case '3': btnIndex = 2; break; 
+                case '4': btnIndex = 3; break; 
+                case '5': btnIndex = 4; break; 
+                case '6': btnIndex = 5; break; 
+                case '7': btnIndex = 6; break; 
+                case '8': btnIndex = 7; break; 
+                case '9': btnIndex = 8; break; 
+                case '.': btnIndex = 9; break; 
+                case '0': btnIndex = 10; break; 
+                case '+': btnIndex = 12; break; 
+                case '(': btnIndex = 13; break; 
+                case ')': btnIndex = 14; break; 
+                case '-': btnIndex = 15; break; 
+                case '<': btnIndex = 16; break; 
+                case 'C': btnIndex = 17; break; 
+                case '*': btnIndex = 18; break; 
+                case '=': btnIndex = 19; break; 
+                case '/': btnIndex = 21; break;
+                default: printf("error in your input"); return;
+            }
+            tryCallHandler(btnIndex);
+        }
     }
 
-    // (temporal) simulate listening FOR TESTING
-    // tryCallHandler(BUTTON_SYMBOL_1);
-    // tryCallHandler(BUTTON_SYMBOL_2);
-    // tryCallHandler(BUTTON_SYMBOL_3);
-    // tryCallHandler(BUTTON_SYMBOL_4);
-    // tryCallHandler(BUTTON_SYMBOL_5);
-    // tryCallHandler(BUTTON_SYMBOL_6);
-    // tryCallHandler(BUTTON_SYMBOL_7);
-    // tryCallHandler(BUTTON_SYMBOL_8);
-    // tryCallHandler(BUTTON_SYMBOL_9);
-    // tryCallHandler(BUTTON_SYMBOL_0);
-
-    // tryCallHandler(BUTTON_LEFT_BRACKET);
-    // tryCallHandler(BUTTON_RIGHT_BRACKET);
-    // tryCallHandler(BUTTON_PLUS);
-    // tryCallHandler(BUTTON_MINUS);
-    // tryCallHandler(BUTTON_MULTIPLY);
-    // tryCallHandler(BUTTON_DIVIDE);
-
-    // tryCallHandler(BUTTON_EQUALS);
-
-    // tryCallHandler(BUTTON_CLEAR_ONE);
-    // tryCallHandler(BUTTON_CLEAR_ONE);
-    // tryCallHandler(BUTTON_CLEAR_ONE);
-
-    // tryCallHandler(BUTTON_CLEAR_ALL);
-    // tryCallHandler(BUTTON_CLEAR_ALL);
-
-    // tryCallHandler(BUTTON_CLEAR_ONE);
-
-    tryCallHandler(BUTTON_SYMBOL_3);
-    tryCallHandler(BUTTON_PLUS);
-    tryCallHandler(BUTTON_SYMBOL_9);
-    tryCallHandler(BUTTON_EQUALS);
+   
 }

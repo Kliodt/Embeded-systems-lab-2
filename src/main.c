@@ -1,10 +1,8 @@
 #include "controller.h"
 #include "handlers.h"
 
-int
-main ()
-{
-  initController ();
+int main(int argc, char *argv[]) {
+    initController();
 
     struct HandlerInfo btnSym0 = {appendCharHandler, {.symbol = '0'}};
     struct HandlerInfo btnSym1 = {appendCharHandler, {.symbol = '1'}};
@@ -16,7 +14,7 @@ main ()
     struct HandlerInfo btnSym7 = {appendCharHandler, {.symbol = '7'}};
     struct HandlerInfo btnSym8 = {appendCharHandler, {.symbol = '8'}};
     struct HandlerInfo btnSym9 = {appendCharHandler, {.symbol = '9'}};
-    
+
     struct HandlerInfo btnSymPlus = {appendCharHandler, {.symbol = '+'}};
     struct HandlerInfo btnSymMinus = {appendCharHandler, {.symbol = '-'}};
     struct HandlerInfo btnSymMultiply = {appendCharHandler, {.symbol = '*'}};
@@ -24,7 +22,8 @@ main ()
 
     struct HandlerInfo btnSymPoint = {appendCharHandler, {.symbol = '.'}};
     struct HandlerInfo btnSymBracketLeft = {appendCharHandler, {.symbol = '('}};
-    struct HandlerInfo btnSymBracketRight = {appendCharHandler, {.symbol = ')'}};
+    struct HandlerInfo btnSymBracketRight = {appendCharHandler,
+                                             {.symbol = ')'}};
 
     struct HandlerInfo btnEquals = {equalsHandler};
     struct HandlerInfo btnClearOne = {clearOneHandler};
@@ -45,7 +44,7 @@ main ()
     setHandler(BUTTON_SYMBOL_9, btnSym9);
     setHandler(BUTTON_POINT, btnSymPoint);
     setHandler(BUTTON_SWITCH_LAYOUT_1, btnSwitchLayout);
-    
+
     // layout 2
     setHandler(BUTTON_PLUS, btnSymPlus);
     setHandler(BUTTON_MINUS, btnSymMinus);
@@ -59,5 +58,5 @@ main ()
     setHandler(BUTTON_CLEAR_ALL, btnClearAll);
     setHandler(BUTTON_SWITCH_LAYOUT_2, btnSwitchLayout);
 
-  startListening ();
+    startListening();    
 }
