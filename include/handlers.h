@@ -5,7 +5,7 @@
 /**
  * Добавить один символ в конец строки ввода
  */
-void appendCharHandler(struct HandlerParameters params);
+void appendCharHandler (struct HandlerParameters params);
 
 /**
  * Удалить последний символ
@@ -25,6 +25,6 @@ void switchLayout(struct HandlerParameters params);
 /**
  * Отобразить результат на экране
  */
-void equalsHandler(struct HandlerParameters params);
+void equalsHandler (struct HandlerParameters params);
 
 // todo: more handlers

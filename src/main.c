@@ -1,8 +1,10 @@
 #include "controller.h"
 #include "handlers.h"
 
-int main() {
-    initController();
+int
+main ()
+{
+  initController ();
 
     struct HandlerInfo btnSym0 = {appendCharHandler, {.symbol = '0'}};
     struct HandlerInfo btnSym1 = {appendCharHandler, {.symbol = '1'}};
@@ -57,5 +59,5 @@ int main() {
     setHandler(BUTTON_CLEAR_ALL, btnClearAll);
     setHandler(BUTTON_SWITCH_LAYOUT_2, btnSwitchLayout);
 
-    startListening();
+  startListening ();
 }
