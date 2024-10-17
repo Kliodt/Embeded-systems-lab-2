@@ -34,33 +34,38 @@ void startListening() {
     }
 
     // (temporal) simulate listening FOR TESTING
-    tryCallHandler(BUTTON_SYMBOL_1);
-    tryCallHandler(BUTTON_SYMBOL_2);
-    tryCallHandler(BUTTON_SYMBOL_3);
-    tryCallHandler(BUTTON_SYMBOL_4);
-    tryCallHandler(BUTTON_SYMBOL_5);
-    tryCallHandler(BUTTON_SYMBOL_6);
-    tryCallHandler(BUTTON_SYMBOL_7);
-    tryCallHandler(BUTTON_SYMBOL_8);
-    tryCallHandler(BUTTON_SYMBOL_9);
-    tryCallHandler(BUTTON_SYMBOL_0);
+    // tryCallHandler(BUTTON_SYMBOL_1);
+    // tryCallHandler(BUTTON_SYMBOL_2);
+    // tryCallHandler(BUTTON_SYMBOL_3);
+    // tryCallHandler(BUTTON_SYMBOL_4);
+    // tryCallHandler(BUTTON_SYMBOL_5);
+    // tryCallHandler(BUTTON_SYMBOL_6);
+    // tryCallHandler(BUTTON_SYMBOL_7);
+    // tryCallHandler(BUTTON_SYMBOL_8);
+    // tryCallHandler(BUTTON_SYMBOL_9);
+    // tryCallHandler(BUTTON_SYMBOL_0);
     
-    tryCallHandler(BUTTON_LEFT_BRACKET);
-    tryCallHandler(BUTTON_RIGHT_BRACKET);
+    // tryCallHandler(BUTTON_LEFT_BRACKET);
+    // tryCallHandler(BUTTON_RIGHT_BRACKET);
+    // tryCallHandler(BUTTON_PLUS);
+    // tryCallHandler(BUTTON_MINUS);
+    // tryCallHandler(BUTTON_MULTIPLY);
+    // tryCallHandler(BUTTON_DIVIDE);
+
+    // tryCallHandler(BUTTON_EQUALS);
+
+    // tryCallHandler(BUTTON_CLEAR_ONE);
+    // tryCallHandler(BUTTON_CLEAR_ONE);
+    // tryCallHandler(BUTTON_CLEAR_ONE);
+
+    // tryCallHandler(BUTTON_CLEAR_ALL);
+    // tryCallHandler(BUTTON_CLEAR_ALL);
+
+    // tryCallHandler(BUTTON_CLEAR_ONE);
+
+    tryCallHandler(BUTTON_SYMBOL_3);
     tryCallHandler(BUTTON_PLUS);
-    tryCallHandler(BUTTON_MINUS);
-    tryCallHandler(BUTTON_MULTIPLY);
-    tryCallHandler(BUTTON_DIVIDE);
-
+    tryCallHandler(BUTTON_SYMBOL_9);
     tryCallHandler(BUTTON_EQUALS);
-
-    tryCallHandler(BUTTON_CLEAR_ONE);
-    tryCallHandler(BUTTON_CLEAR_ONE);
-    tryCallHandler(BUTTON_CLEAR_ONE);
-
-    tryCallHandler(BUTTON_CLEAR_ALL);
-    tryCallHandler(BUTTON_CLEAR_ALL);
-
-    tryCallHandler(BUTTON_CLEAR_ONE);
 
 }
