@@ -2,10 +2,12 @@
 #include "rpn_math.h"
 #include <stdio.h>
 
-struct {
-    char inputBuffer[SCREEN_CAPACITY_SYMBOLS];
-    int count;
-} globalState = {.count = 0};
+struct
+{
+  char inputBuffer[SCREEN_CAPACITY_SYMBOLS];
+  int count;
+  bool kb_layout;
+} globalState = { .count = 0 };
 
 void appendCharHandler(struct HandlerParameters params) {
     globalState.inputBuffer[globalState.count] = params.symbol;
