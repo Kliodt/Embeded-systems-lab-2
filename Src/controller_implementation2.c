@@ -10,7 +10,10 @@ int KB_LAYOUT = 0;
 
 struct HandlerInfo allHandlers[BUTTONS_TOTAL] = {0};
 
-bool initController() { return true; }
+bool initController() { 
+    showString("Hamza CALC INC.", 15);
+    return true; 
+}
 
 void showString(char str[], int count) {
     oled_Reset();
@@ -22,7 +25,7 @@ void showString(char str[], int count) {
         uint8_t fullSubstringCount = count / widthInSymbols;
         uint8_t lastSubstringLen = count % widthInSymbols;
         for (int i = 0; i < fullSubstringCount; i++) {
-            oled_SetCursor(0, i * heightInSymbols);
+            oled_SetCursor(0, i * 2 * heightInSymbols);
             char substring[widthInSymbols + 1];
             for (int j = 0; j < widthInSymbols; j++) {
                 substring[j] = str[j + i * widthInSymbols];
@@ -30,13 +33,14 @@ void showString(char str[], int count) {
             substring[widthInSymbols] = '\0';
             oled_WriteString(substring, defaultFont, White);
         }
-        oled_SetCursor(0, fullSubstringCount * heightInSymbols);
+        oled_SetCursor(0, fullSubstringCount * heightInSymbols * 2);
         char lastSubstring[lastSubstringLen + 1];
         for (int j = 0; j < lastSubstringLen; j++) {
             lastSubstring[j] = str[j + fullSubstringCount * widthInSymbols];
         }
         lastSubstring[lastSubstringLen] = '\0';
         oled_WriteString(lastSubstring, defaultFont, White);
+        oled_UpdateScreen();
     }
 }
 
@@ -65,23 +69,25 @@ void startListening() {
 void changeLayout() {
     if (KB_LAYOUT == 12) {
         KB_LAYOUT = 0;
+        showString("layout: digits", 14);
     } else if (KB_LAYOUT == 0) {
         KB_LAYOUT = 12;
+        showString("layout: operations", 18);
     }
 }
 
 void KB_Test(void) {
     UART_Transmit((uint8_t *)"KB test start\n");
     uint8_t Row[4] = {ROW1, ROW2, ROW3, ROW4}, Key;
-    oled_Reset();
-    oled_WriteString("From bottom to top", Font_7x10, White);
+    // oled_Reset();
+    // oled_WriteString("From bottom to top", Font_7x10, White);
     // OLED_KB(OLED_Keys);
-    oled_UpdateScreen();
+    // oled_UpdateScreen();
     while (1) {
         int row_number = 0;
         for (row_number; row_number < 4; row_number++) {
             Key = Check_Row(Row[row_number]);
-            if (Key == 0x01) {
+            if (Key == 0x04) {
                 tryCallHandler(3 * row_number + KB_LAYOUT);
                 // UART_Transmit ((uint8_t *)"Left pressed\n");
                 // L = 1;
@@ -93,7 +99,7 @@ void KB_Test(void) {
                 // C = 1;
                 // OLED_Keys[1 + 3 * i] = 0x31;
                 // OLED_KB (OLED_Keys);
-            } else if (Key == 0x04) {
+            } else if (Key == 0x01) {
                 tryCallHandler(3 * row_number + 2 + KB_LAYOUT);
                 // UART_Transmit( (uint8_t*)"Right pressed\n" );
                 // R = 1;

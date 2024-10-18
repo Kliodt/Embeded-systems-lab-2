@@ -1,5 +1,6 @@
 #include "handlers.h"
 #include "rpn_math.h"
+#include "stringUtils.h"
 #include <stdio.h>
 
 struct
@@ -40,7 +41,9 @@ void equalsHandler(struct HandlerParameters params) {
 
     switch (resultCode) {
         case OK:
-            globalState.count = snprintf(globalState.inputBuffer, SCREEN_CAPACITY_SYMBOLS, "%lf", result);
+            // globalState.count = snprintf(globalState.inputBuffer, SCREEN_CAPACITY_SYMBOLS, "%lf", result);
+            double_to_string(result, globalState.inputBuffer);
+            globalState.count = strLen(globalState.inputBuffer);
             globalState.count -= trackingZeroesCount(globalState.inputBuffer, globalState.count);
             showString(globalState.inputBuffer, globalState.count);
             break;
@@ -69,3 +72,49 @@ int trackingZeroesCount(char buf[], int count) {
     }
     return 0;
 }
+
+typedef unsigned long rsize_t;
+typedef int errno_t;
+
+#define EOK       0     /* Операция успешна */
+#define ESNULLP   1     /* Нулевой указатель */
+#define ESZEROL   2     /* Длина равна нулю */
+#define ESLEMAX   3     /* Длина превышает максимум */
+#define ESNOSPC   4     /* Недостаточно места */
+
+#define RSIZE_MAX_STR  (4UL << 10)  /* Максимальный размер строки 4KB */
+
+errno_t strCopy(char *dest, int destsz, const char *src) {
+    int i;
+
+    /* Проверка на нулевые указатели */
+    if (dest == 0) {
+        return ESNULLP;
+    }
+    if (src == 0) {
+        dest[0] = '\0';
+        return ESNULLP;
+    }
+
+    /* Проверка на корректность размера */
+    if (destsz == 0) {
+        return ESZEROL;
+    }
+    if (destsz > RSIZE_MAX_STR) {
+        return ESLEMAX;
+    }
+
+    /* Копирование строки */
+    for (i = 0; i < destsz; i++) {
+        dest[i] = src[i];
+        if (src[i] == '\0') {
+            /* Успешное копирование */
+            return EOK;
+        }
+    }
+
+    /* Недостаточно места в dest */
+    dest[0] = '\0';  /* Обнуляем dest */
+    return ESNOSPC;
+}
+

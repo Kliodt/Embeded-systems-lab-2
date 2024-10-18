@@ -39,7 +39,7 @@
 #define BUTTONS_TOTAL 24
 
 // screen parameters
-#define SCREEN_CAPACITY_SYMBOLS 100 // ! change it to real one
+#define SCREEN_CAPACITY_SYMBOLS 72 // ! change it to real one
 
 /**
  * Параметры функции-обработчика
