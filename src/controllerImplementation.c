@@ -1,4 +1,5 @@
 #include "controller.h"
+#include "stringUtils.h"
 
 struct HandlerInfo allHandlers[BUTTONS_TOTAL] = {0};
 

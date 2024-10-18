@@ -1,6 +1,6 @@
-#include "../include/rpn_math.h"
+#include "rpn_math.h"
 #include <stdio.h>
-#include <string.h>
+#include "stringUtils.h"
 #define STACK_MAX_SIZE 30
 #define STACK_OVERFLOW  -100
 #define STACK_UNDERFLOW -101
@@ -85,9 +85,11 @@ size_t split_equaition_into_tokens(char* expression, size_t expression_size, str
         current_symbol = expression[i];
         if(is_defined_operation(current_symbol)){
             if(number_start != -1){
-                strncpy_s(number_buffer, 99, expression + number_start, i - number_start);
+                // strncpy_s(number_buffer, 99, expression + number_start, i - number_start);
+                strCopy(number_buffer, 99, expression + number_start);
                 number_buffer[i - number_start + 1] = '\0';
-                sscanf_s(number_buffer, "%lf", &current_number);
+                // sscanf_s(number_buffer, "%lf", &current_number);
+                current_number = string_to_double(number_buffer);
                 struct expression_token cur_t;
                 cur_t.operation = NO_OP;
                 cur_t.number = current_number;
@@ -104,9 +106,12 @@ size_t split_equaition_into_tokens(char* expression, size_t expression_size, str
             if(current_symbol == '.' && number_start == -1) return -1;
             if(number_start == -1) number_start = (int) i;
             if(i == expression_size - 1){
-                strncpy_s(number_buffer, 99, expression + number_start, i - number_start + 1);
+                // strncpy_s(number_buffer, 99, expression + number_start, i - number_start + 1);
+                strCopy(number_buffer, 99, expression + number_start);
                 number_buffer[i - number_start + 1] = '\0';
-                sscanf_s(number_buffer, "%lf", &current_number);
+                // sscanf_s(number_buffer, "%lf", &current_number);
+                current_number = string_to_double(number_buffer);
+
                 struct expression_token cur_t;
                 cur_t.operation = NO_OP;
                 cur_t.number = current_number;
