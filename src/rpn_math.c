@@ -303,16 +303,16 @@ enum resolve_expression_code resolve_expression(char* expression, size_t express
 
 
 
-int main(){
-    char* s = "3*(1.1-2)";
-    double r;
-    enum resolve_expression_code result = resolve_expression(s, 9, &r);
-    if(result == OK){
-        printf("%f\n", r);
-    } else if (result == NOT_VALID){
-        printf("Not valid expression");
-    } else{
-        printf("Eror during computation");
-    }
-    return 0;
-}
+// int main(){
+//     char* s = "3*(1.1-2)";
+//     double r;
+//     enum resolve_expression_code result = resolve_expression(s, 9, &r);
+//     if(result == OK){
+//         printf("%f\n", r);
+//     } else if (result == NOT_VALID){
+//         printf("Not valid expression");
+//     } else{
+//         printf("Eror during computation");
+//     }
+//     return 0;
+// }
