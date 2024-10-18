@@ -75,7 +75,7 @@ void KB_Test(void) {
     uint8_t Row[4] = {ROW1, ROW2, ROW3, ROW4}, Key;
     oled_Reset();
     oled_WriteString("From bottom to top", Font_7x10, White);
-    OLED_KB(OLED_Keys);
+    // OLED_KB(OLED_Keys);
     oled_UpdateScreen();
     while (1) {
         int row_number = 0;

@@ -28,7 +28,7 @@ void clearAllHandler(struct HandlerParameters params) {
 }
 
 void switchLayout(struct HandlerParameters params) {
-    changeLayout()
+    changeLayout();
 }
 
 int trackingZeroesCount(char buf[], int count);
