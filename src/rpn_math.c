@@ -1,6 +1,6 @@
 #include "../include/rpn_math.h"
 #include <stdio.h>
-#include <string.h>
+
 #define STACK_MAX_SIZE 30
 #define STACK_OVERFLOW  -100
 #define STACK_UNDERFLOW -101
@@ -74,6 +74,37 @@ enum math_operation get_operation(char c){
     }
 }
 
+void copy_string(char* from_buffer, char* to_buffer, int size){
+    for(size_t i = 0; i < size; i++){
+        to_buffer[i] = from_buffer[i];
+    }
+}
+
+double get_double_from_string(char* buffer, int size){
+    double r=0;
+    double after_coma_r = 0;
+    size_t current_c;
+    size_t after_coma = 0;
+    int after_coma_flag = 0;
+    for(current_c = 0; current_c < size; current_c++){
+        if(buffer[current_c] == '.'){
+            after_coma_flag = 1;
+            continue;
+        }
+        if(!after_coma_flag){
+            r = r * 10 + (buffer[current_c] - 48);
+        } else {
+            after_coma++;
+            after_coma_r = after_coma_r * 10 + (buffer[current_c] - 48);
+        }
+    }
+    while(after_coma > 0){
+        after_coma_r /= 10;
+        after_coma -= 1;
+    }
+    return r + after_coma_r;
+}
+
 size_t split_equaition_into_tokens(char* expression, size_t expression_size, struct expression_token* token_buffer){
     size_t current_token_buffer_size = 0;
     char current_symbol;
@@ -85,9 +116,12 @@ size_t split_equaition_into_tokens(char* expression, size_t expression_size, str
         current_symbol = expression[i];
         if(is_defined_operation(current_symbol)){
             if(number_start != -1){
-                strncpy_s(number_buffer, 99, expression + number_start, i - number_start);
+                //strncpy_s(number_buffer, 99, expression + number_start, i - number_start);
+                copy_string(expression + number_start, number_buffer, i - number_start);
                 number_buffer[i - number_start + 1] = '\0';
-                sscanf_s(number_buffer, "%lf", &current_number);
+                //sscanf_s(number_buffer, "%lf", &current_number);
+                current_number = get_double_from_string(number_buffer, i - number_start);
+
                 struct expression_token cur_t;
                 cur_t.operation = NO_OP;
                 cur_t.number = current_number;
@@ -104,9 +138,12 @@ size_t split_equaition_into_tokens(char* expression, size_t expression_size, str
             if(current_symbol == '.' && number_start == -1) return -1;
             if(number_start == -1) number_start = i;
             if(i == expression_size - 1){
-                strncpy_s(number_buffer, 99, expression + number_start, i - number_start + 1);
-                number_buffer[i - number_start + 1] = '\0';
-                sscanf_s(number_buffer, "%lf", &current_number);
+                //strncpy_s(number_buffer, 99, expression + number_start, i - number_start + 1);
+                copy_string(expression + number_start, number_buffer, i - number_start + 1);
+
+                number_buffer[i - number_start + 1] = '\0'; // +2
+                //sscanf_s(number_buffer, "%lf", &current_number);
+                current_number = get_double_from_string(number_buffer, i - number_start);
                 struct expression_token cur_t;
                 cur_t.operation = NO_OP;
                 cur_t.number = current_number;
@@ -266,16 +303,16 @@ enum resolve_expression_code resolve_expression(char* expression, size_t express
 
 
 
-// int main(){
-//     char* s = "3*(1.1-2)";
-//     double r;
-//     enum resolve_expression_code result = resolve_expression(s, 9, &r);
-//     if(result == OK){
-//         printf("%f\n", r);
-//     } else if (result == NOT_VALID){
-//         printf("Not valid expression");
-//     } else{
-//         printf("Eror during computation");
-//     }
-//     return 0;
-// }
+int main(){
+    char* s = "3*(1.1-2)";
+    double r;
+    enum resolve_expression_code result = resolve_expression(s, 9, &r);
+    if(result == OK){
+        printf("%f\n", r);
+    } else if (result == NOT_VALID){
+        printf("Not valid expression");
+    } else{
+        printf("Eror during computation");
+    }
+    return 0;
+}
