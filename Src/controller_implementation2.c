@@ -37,6 +37,7 @@ void showString(char str[], int count) {
         }
         lastSubstring[lastSubstringLen] = '\0';
         oled_WriteString(lastSubstring, defaultFont, White);
+        oled_UpdateScreen();
     }
 }
 
