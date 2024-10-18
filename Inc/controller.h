@@ -82,4 +82,4 @@ bool setHandler (int buttonCode, struct HandlerInfo handlerConfig);
  */
 void startListening ();
 
-bool changeLayout ();
+void changeLayout ();

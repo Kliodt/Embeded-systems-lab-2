@@ -1,4 +1,4 @@
-#include "../include/rpn_math.h"
+#include "rpn_math.h"
 #include <stdio.h>
 #include <string.h>
 #define STACK_MAX_SIZE 30
